@@ -10,11 +10,6 @@ RUN /bin/bash -c 'apt-get -y update; \
     apt-get -y install certbot; \
     apt-get -y install python3-certbot-dns-digitalocean'
 
-# Copy in our shell script
-# COPY gencerts.sh ~/gencerts.sh
+COPY secrets/DOtoken.ini /root/DOtoken.ini
 
-# What's next?? 
-# We need to find out if we're running on the server or not
-# If not, self-sign the certificate
-# If yes, get it 
-
+CMD ["certbot", "certonly", "--test-cert", "--dns-digitalocean","--dns-digitalocean-credentials", "/root/DOtoken.ini","-d","steponmy.com"]
