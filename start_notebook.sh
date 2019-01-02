@@ -7,6 +7,8 @@ then
         -p 443:8888 \
         -v /root/dock-datasci/work:/home/jovyan/work \
         -v /root/dock-datasci/secrets:/home/jovyan/secrets \
+        -e CHOWN_HOME=yes \
+        -e CHOWN_HOME_OPTS='-R' \
         notebook \
         /bin/bash -c " \
         jupyter notebook password; \
