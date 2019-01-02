@@ -1,8 +1,10 @@
+#!/bin/bash
+
 if [ $1 = "server" ]
 then
     echo "Starting on server..."
     docker run --rm \
-        -p 443:8888 \ 
+        -p 443:8888 \
         -v /root/dock-datasci/work:/home/jovyan/work \
         -v /root/dock-datasci/secrets:/home/jovyan/secrets \
         notebook \
