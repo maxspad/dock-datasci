@@ -10,6 +10,5 @@ RUN /bin/bash -c 'apt-get -y update; \
     apt-get -y install certbot; \
     apt-get -y install python3-certbot-dns-digitalocean'
 
-VOLUME /root/secrets
 
-CMD ["certbot", "certonly", "--test-cert", "--dns-digitalocean","--dns-digitalocean-credentials", "/root/secrets/DOtoken.ini"]
+CMD ["certbot", "certonly", "--dns-digitalocean","--dns-digitalocean-credentials", "/root/secrets/DOtoken.ini"]
