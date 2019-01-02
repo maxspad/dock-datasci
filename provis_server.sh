@@ -14,7 +14,7 @@ ssh root@steponmy.com /bin/bash /root/init_server.sh
 
 # Image is built, push secret keys/passwords 
 echo "Copying secrets..."
-scp secrets/ root@steponmy.com:/root/dock-datasci/secrets/
+scp -r secrets/ root@steponmy.com:/root/dock-datasci/secrets/
 
 # Start server...
 ssh root@steponmy.com /bin/bash -c "/root/dock-datasci/start_notebook.sh server"
