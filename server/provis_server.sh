@@ -55,7 +55,7 @@ ssh root@$server_addr /bin/bash -c "
 
 # Image is built, push secret keys/passwords 
 echo "Copying secrets..."
-scp -r server/secrets/ root@steponmy.com:/root/$repo_name/
+scp -r server/secrets/ root@steponmy.com:/root/$repo_name/server/
 
 echo "Done. You may now SSH into the server and run /root/$repo_name/start_notebook.sh server to create a password and start the notebook server."
 
