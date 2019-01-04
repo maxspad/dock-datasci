@@ -1,0 +1,37 @@
+version: '3.3'
+services:
+  notebook:
+    build:
+      context: ./notebook
+      args:
+        - self_signed=yes
+    container_name: running-notebook
+    volumes:
+      - work-vol:/home/jovyan/work/
+    secrets:
+      - cert
+      - privkey
+      - nbpw
+    networks:
+      - nbnetwork
+    ports:
+      - "443:8888"
+    stdin_open: true
+    tty: true
+
+volumes:
+  work-vol:
+
+secrets:
+  cert:
+    # file: /c/Users/Max/Desktop/dock-datasci/secrets/letsencrypt/fullchain.pem
+    file: ./secrets/letsencrypt/fullchain.pem
+  privkey:
+    # file: c:/Users/Max/Desktop/dock-datasci/secrets/letsencrypt/privkey.pem
+    file: ./secrets/letsencrypt/privkey.pem
+  nbpw:
+    # file: c:/Users/Max/Desktop/dock-datasci/secrets/nbpw.txt
+    file: ./secrets/nbpw.txt
+
+networks:
+  nbnetwork:
