@@ -4,7 +4,7 @@ services:
     build:
       context: ./notebook
       args:
-        - self_signed=yes
+        - self_signed=no
     container_name: running-notebook
     volumes:
       - work-vol:/home/jovyan/work/

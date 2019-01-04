@@ -1,1 +1,2 @@
-
+- Add little script that starts it on the server
+- Add script to generate password 
