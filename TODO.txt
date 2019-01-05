@@ -1,1 +1,2 @@
 - Add little script that starts it on the server
+- Make scripts directory-agnostic
