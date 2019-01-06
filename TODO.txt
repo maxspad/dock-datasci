@@ -1,2 +1,1 @@
-- Make scripts directory-agnostic
 - Make scripts jupyter image-agnostic
