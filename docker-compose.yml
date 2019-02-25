@@ -7,11 +7,13 @@ services:
         - self_signed=no
     container_name: running-notebook
     volumes:
-      - work-vol:/home/jovyan/work/
-    secrets:
-      - cert
-      - privkey
-      - nbpw
+      - type: bind
+        source: ./secrets
+        target: /secrets
+      - type: bind
+      - type: volume
+        source: work-vol
+        target: /home/jovyan/work
     networks:
       - nbnetwork
     ports:
@@ -22,16 +24,16 @@ services:
 volumes:
   work-vol:
 
-secrets:
-  cert:
-    # file: /c/Users/Max/Desktop/dock-datasci/secrets/letsencrypt/fullchain.pem
-    file: ./secrets/letsencrypt/fullchain.pem
-  privkey:
-    # file: c:/Users/Max/Desktop/dock-datasci/secrets/letsencrypt/privkey.pem
-    file: ./secrets/letsencrypt/privkey.pem
-  nbpw:
-    # file: c:/Users/Max/Desktop/dock-datasci/secrets/nbpw.txt
-    file: ./secrets/nbpw.txt
+# secrets:
+#   cert:
+#     # file: /c/Users/Max/Desktop/dock-datasci/secrets/letsencrypt/fullchain.pem
+#     file: ./secrets/letsencrypt/fullchain.pem
+#   privkey:
+#     # file: c:/Users/Max/Desktop/dock-datasci/secrets/letsencrypt/privkey.pem
+#     file: ./secrets/letsencrypt/privkey.pem
+#   nbpw:
+#     # file: c:/Users/Max/Desktop/dock-datasci/secrets/nbpw.txt
+#     file: ./secrets/nbpw.txt
 
 networks:
   nbnetwork:

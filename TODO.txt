@@ -1,1 +1,3 @@
-- Make scripts jupyter image-agnostic
+- Should deploy just with docker-compose up
+- Password
+- Valid SSL cert
