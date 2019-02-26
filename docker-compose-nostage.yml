@@ -14,7 +14,7 @@ services:
       - VALIDATION=dns
       - DNSPLUGIN=digitalocean #optional
       - EMAIL=imax32@gmail.com #optional
-      - STAGING=true #optional
+      - STAGING=false #optional
     volumes:
       - ./secrets:/config/dns-conf/
       - certvolume:/config
