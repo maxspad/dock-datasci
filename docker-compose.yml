@@ -1,39 +1,41 @@
-version: '3.3'
+version: "2"
 services:
-  notebook:
-    build:
-      context: ./notebook
-      args:
-        - self_signed=no
-    container_name: running-notebook
+  letsencrypt:
+    image: linuxserver/letsencrypt
+    container_name: letsencrypt
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - PUID=1000
+      - PGID=100
+      - TZ=Europe/London
+      - URL=steponmy.com
+      - SUBDOMAINS=www,
+      - VALIDATION=dns
+      - DNSPLUGIN=digitalocean #optional
+      - EMAIL=imax32@gmail.com #optional
+      - STAGING=true #optional
     volumes:
-      - type: bind
-        source: ./secrets
-        target: /secrets
-      - type: bind
-      - type: volume
-        source: work-vol
-        target: /home/jovyan/work
-    networks:
-      - nbnetwork
+      - ./secrets:/config/dns-conf/
+      - certvolume:/config
     ports:
-      - "443:8888"
-    stdin_open: true
-    tty: true
-
+      - 443:443
+      - 80:80 #optional
+    mem_limit: 4096m
+    restart: unless-stopped
+  nbserver:
+    #image: jupyter/minimal-notebook
+    build: ./
+    container_name: nbserver
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+    command: jupyter lab --certfile=/certs/keys/letsencrypt/fullchain.pem --keyfile=/certs/keys/letsencrypt/privkey.pem
+    ports:
+      - 8888:8888
+    volumes:
+      - workvolume:/home/jovyan/work
+      - ./jupyter:/home/jovyan/.jupyter
+      - certvolume:/certs
 volumes:
-  work-vol:
-
-# secrets:
-#   cert:
-#     # file: /c/Users/Max/Desktop/dock-datasci/secrets/letsencrypt/fullchain.pem
-#     file: ./secrets/letsencrypt/fullchain.pem
-#   privkey:
-#     # file: c:/Users/Max/Desktop/dock-datasci/secrets/letsencrypt/privkey.pem
-#     file: ./secrets/letsencrypt/privkey.pem
-#   nbpw:
-#     # file: c:/Users/Max/Desktop/dock-datasci/secrets/nbpw.txt
-#     file: ./secrets/nbpw.txt
-
-networks:
-  nbnetwork:
+  certvolume:
+  workvolume:
