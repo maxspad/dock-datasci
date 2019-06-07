@@ -8,9 +8,9 @@ services:
     environment:
       - PUID=1000
       - PGID=100
-      - TZ=Europe/London
-      - URL=steponmy.com
-      - SUBDOMAINS=www,
+      - TZ=EDT
+      - URL=maxspadafore.com
+      - SUBDOMAINS=www,jupyter,
       - VALIDATION=dns
       - DNSPLUGIN=digitalocean #optional
       - EMAIL=imax32@gmail.com #optional
@@ -27,6 +27,8 @@ services:
     #image: jupyter/minimal-notebook
     build: ./
     container_name: nbserver
+    depends_on:
+      - letsencrypt
     environment:
       - JUPYTER_ENABLE_LAB=yes
     command: jupyter lab --certfile=/certs/keys/letsencrypt/fullchain.pem --keyfile=/certs/keys/letsencrypt/privkey.pem
