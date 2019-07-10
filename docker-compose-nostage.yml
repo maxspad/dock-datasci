@@ -24,7 +24,7 @@ services:
     mem_limit: 4096m
     restart: unless-stopped
   nbserver:
-    image: maxspad/dock-datasci
+    image: imax32/dock-datasci
     # build: ./
     container_name: nbserver
     depends_on:
