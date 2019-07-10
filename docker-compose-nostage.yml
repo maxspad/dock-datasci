@@ -24,8 +24,8 @@ services:
     mem_limit: 4096m
     restart: unless-stopped
   nbserver:
-    #image: jupyter/minimal-notebook
-    build: ./
+    image: maxspad/dock-datasci
+    # build: ./
     container_name: nbserver
     depends_on:
       - letsencrypt
