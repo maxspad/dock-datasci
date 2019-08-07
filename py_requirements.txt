@@ -4,3 +4,4 @@ wordcloud
 nltk
 spacy
 xgboost
+scikit-learn==0.21.2
