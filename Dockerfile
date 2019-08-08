@@ -36,6 +36,7 @@ tar zxvf google-cloud-sdk-242.0.0-linux-x86_64.tar.gz google-cloud-sdk && \
 # Python Packages
 COPY py_requirements.txt ./py_requirements.txt
 RUN pip install -r ./py_requirements.txt
+RUN python -m spacy download en_core_web_lg
 
 
 
